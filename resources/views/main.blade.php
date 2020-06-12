@@ -4,32 +4,31 @@
 
 
 @section('main-content')
-  <h2>Валюты</h2>
-  <!-- {{ $data }} -->
-  @foreach($data->channel->item as $current)
-    <div class="container">
-      <div class="row mt-5 border-2 border-color-grey">
-        <div class="col-md-4">
-          <h4>{{$current->title}}</h4>
-        </div>
-        <div class="col-md-3">
-          <p>{{$current->description}}</p>
-        </div>
-        <div class="col-md-3">
-          @if($current->change > 0)
-            <p style="color:green;">{{$current->index}} : {{$current->change}}</p>
-          @else
-          @if($current->change < 0)
-            <p style="color:red;">{{$current->index}} : {{$current->change}}</p>
-          @else
-            <p style="color:blue;">STABLE</p>
-          @endif
-          @endif
-        </div>
-        <div class="col-md-2">
-          <h3>{{$current->pubDate}}</h3>
-        </div>
-      </div>
+  <h2>Валюты к тенге</h2>
+
+<table class="table table-striped text-center">
+  <thead>
+    <tr>
+      <th scope="col">Индекс валюты</th>
+      <th scope="col">Курс</th>
+      <th scope="col">Дата</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach($data as $current)
+      <tr>
+        <td class="text-center"><a href="{{ route('currency-one', $current->name)}}">{{$current->name}}</a></td>
+        <td class="text-center">{{$current->rate}}</td>
+        <td class="text-center">{{$current->updated_at}}</td>
+      </tr>
+    @endforeach
+  </tbody>
+</table>
+
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <span>{!! $data->links() !!}</span>
     </div>
-  @endforeach
+  </div>
 @endsection

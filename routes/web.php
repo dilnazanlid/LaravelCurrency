@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('main');
-});
+Route::get('/', function () {return view('main');})->name('main');
 
-Route::get('/', 'CurrenciesController@AllData')->name('currency-data');
+Route::get('/', 'CurrenciesController@AllData');
+
+Route::get('/{name}', 'CurrenciesController@CurrencyByName')->name('currency-one');

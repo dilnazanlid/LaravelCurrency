@@ -40,15 +40,12 @@ class UpdateCurrencies extends Command
     {
       $xml = simplexml_load_file('https://nationalbank.kz/rss/rates_all.xml?switch=russian');
 
-      // $currency_name = $key->title;
-      // $current = Currency::find($currency_name);
-      foreach ($xml->channel->item as $key) {
-          $current = new Currency;
-          $curent->name = $key->title;
-          $current->rate = (double)$key->description / $key->quant;
-          $current->date = $key->pubDate;
-          $current->save();
+      foreach ($xml->channel->item as $key => $value) {
+        $current = Currency::where('name' , '=', $value->title)->first();
+        $current->rate = (double)$value->description / $value->quant;
+        $current->updated_at = \Carbon\Carbon::now();
+        $current->save();
       }
-      echo "Successfully updated!";
+      \Log::info('was here @' . \Carbon\Carbon::now());
     }
 }

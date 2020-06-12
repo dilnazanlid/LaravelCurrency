@@ -24,7 +24,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('currency:update')->dailyAt('00:00');
+        $schedule->command('currency:update')->dailyAt('07:05');
     }
 
     /**
