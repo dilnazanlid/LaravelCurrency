@@ -3,7 +3,7 @@
 @section('title')Главная@endsection
 
 
-@section('main-content')
+@section('content')
 <div class="container text-center">
   <h2>{{$data->name}}</h2>
   <h1 class="green">1тг = {{$data->rate}}</h1>

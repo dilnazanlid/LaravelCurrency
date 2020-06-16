@@ -4,6 +4,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {return view('main');})->name('main');
 
-Route::get('/', 'CurrenciesController@AllData');
+Auth::routes();
 
-Route::get('/{name}', 'CurrenciesController@CurrencyByName')->name('currency-one');
+Route::get('/home', 'HomeController@index')->name('home');
