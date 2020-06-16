@@ -9,13 +9,15 @@ use App\Models\Currency;
 class CurrenciesController extends Controller {
 
     public function AllData(){
-      $data = DB::table('currencies')->orderBy('name')->paginate(10);
-      return view('main', ['data'=>$data]);
+      $data = DB::table('currencies')->paginate(10);
+      if(is_null($data)) return response()->json(["message"=>"Record not found!"], 404);
+      return response()->json($data, 200);
     }
 
     public function CurrencyByName($id){
       $data = DB::table('currencies')->where('name', $id)->first();
-      return view('currency', ['data' => $data]);
+      if(is_null($data)) return response()->json(["message"=>"Record not found!"], 404);
+      return response()->json($data, 200);
     }
 
 
