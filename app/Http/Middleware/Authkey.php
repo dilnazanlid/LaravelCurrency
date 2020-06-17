@@ -15,12 +15,12 @@ class Authkey
      */
     public function handle($request, Closure $next)
     {
-        //$token = '2LNOTdiu0iS7Uj1NZjfB1Eg4WkwnxT4hduElGt6LsjKLBfPTMcrDyVTexvDK';
+        $rightToken = '2LNOTdiu0iS7Uj1NZjfB1Eg4WkwnxT4hduElGt6LsjKLBfPTMcrDyVTexvDK';
         //$request->headers->set('Authorization', $token);
-         $token = $request->header('APP_KEY');
-         if(is_null($request->header('APP_KEY'))){
+         $token = $request->header('Authorization');
+         if(is_null($request->header('Authorization'))){
            return response()->json(['message'=>'The token is not found!'], 401);
-         }else if($token!='2LNOTdiu0iS7Uj1NZjfB1Eg4WkwnxT4hduElGt6LsjKLBfPTMcrDyVTexvDK'){
+         }else if($token!=$rightToken){
            return response()->json(['message'=>'The token is not correct!'], 403);
          }
         return $next($request);
